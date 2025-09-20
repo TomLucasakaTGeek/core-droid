@@ -1,6 +1,11 @@
 package com.example.android_basics;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +14,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    // declare button fields
+   Button play, stop;
+   MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +28,26 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        mediaPlayer = MediaPlayer.create(this, Uri.parse("https://utkarshpandey.com/assets/sound/nuclear-siren.mp3"));
+        // initialize java fields from UI Widgets
+        play = findViewById(R.id.btn_play);
+        stop = findViewById(R.id.btn_stop);
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Playing Music", Toast.LENGTH_SHORT).show();
+                mediaPlayer.start();
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Stopped Music", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
