@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     // declare button fields
-   Button play, stop;
+   Button play, pause, stop;
    MediaPlayer mediaPlayer;
 
     @Override
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // initialize java fields from UI Widgets
         play = findViewById(R.id.btn_play);
         stop = findViewById(R.id.btn_stop);
+        pause = findViewById(R.id.btn_pause);
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +47,16 @@ public class MainActivity extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.stop();
                 Toast.makeText(MainActivity.this, "Stopped Music", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.pause();
+                Toast.makeText(MainActivity.this, "Paused Music", Toast.LENGTH_SHORT).show();
             }
         });
     }
